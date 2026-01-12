@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const LOCAL_API_URL = "http://localhost:8000/optimize";
+const LOCAL_API_URL = "http://localhost:8001/optimize";
 
 // --- UI HANDLERS ---
 // (Optional) Keep settings toggle if you plan to add other settings later, 

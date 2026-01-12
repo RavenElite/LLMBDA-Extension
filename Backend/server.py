@@ -7,10 +7,12 @@ import uvicorn
 # Initialize App
 app = FastAPI()
 
-# Allow your Chrome Extension to talk to this server
+origin_regex = r"chrome-extension://.*|http://localhost.*"
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace '*' with your Extension ID (chrome-extension://...)
+    allow_origin_regex=origin_regex, # <--- The Magic Fix
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -50,4 +52,4 @@ async def optimize_prompt(req: OptimizeRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
